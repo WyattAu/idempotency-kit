@@ -1,4 +1,5 @@
 # idempotency-kit
+[![Estate integration](https://github.com/WyattAu/estate-integration/actions/workflows/ci.yml/badge.svg)](https://github.com/WyattAu/estate-integration/actions/workflows/ci.yml)
 
 Idempotency keys for Rust — the shared request-deduplication pattern of
 the WyattAu estate, unified from webhookkit's replay guard and the
