@@ -1,9 +1,9 @@
 [package]
 name = "idempotency-kit"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 rust-version = "1.85"
-description = "Idempotency keys for Rust: scoped key derivation, TTL claims with response replay, and pluggable memory/redis/sqlite stores"
+description = "Idempotency keys for Rust: scoped BLAKE3 key derivation, TTL claims with response replay, pluggable memory/redis stores"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/WyattAu/idempotency-kit"
 keywords = ["idempotency", "deduplication", "redis", "webhook", "reliability"]
