@@ -83,6 +83,7 @@
 
 #![forbid(unsafe_code)]
 #![deny(missing_docs)]
+#![deny(missing_docs)]
 
 mod error;
 mod executor;

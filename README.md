@@ -139,6 +139,14 @@ cargo test --features redis --test redis_idempotency -- --include-ignored
 
 CI runs them on every push (GitHub runners have docker).
 
+## Stability
+
+`idempotency-kit` is 1.0. Breaking changes require a minor bump and a
+`#[deprecated]` window of at least one minor release; MSRV bumps are minor
+releases, never patch releases. Claims accepted by any 1.x store remain
+replayable by later 1.x stores. The sqlite store schema may change in minors
+with migration notes; redis key naming may gain a version prefix.
+
 ## License
 
 Licensed under either of [Apache-2.0](LICENSE-APACHE) or [MIT](LICENSE-MIT)
