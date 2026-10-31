@@ -37,7 +37,7 @@ replay, and store trait surfaces as API-stable.
   response recording, `release` for error-path rollback.
 - `MemoryStore` (default `memory` feature): DashMap-backed,
   TTL-expiring, capacity-bounded (default 65,536) with fail-closed
-  `StoreError::CapacityExceeded` — mirrors webhookkit 2.0.0 replay-guard
+  `StoreError::CapacityExceeded`; mirrors webhookkit 2.0.0 replay-guard
   semantics.
 - `RedisStore` (`redis` feature): `SET NX EX` atomic claims, response
   replay under `{key}:resp` with the claim's remaining TTL, `DEL`

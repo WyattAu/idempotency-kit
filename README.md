@@ -1,11 +1,11 @@
 # idempotency-kit
 [![Estate integration](https://github.com/WyattAu/estate-integration/actions/workflows/ci.yml/badge.svg)](https://github.com/WyattAu/estate-integration/actions/workflows/ci.yml)
 
-Idempotency keys for Rust — the shared request-deduplication pattern of
+Idempotency keys for Rust; the shared request-deduplication pattern of
 the WyattAu estate, unified from webhookkit's replay guard and the
 Redis-backed request deduplication in the commerce services.
 
-- **Deterministic key derivation**: scoped BLAKE3 — the same request bytes
+- **Deterministic key derivation**: scoped BLAKE3; the same request bytes
   always derive the same `"{scope}:{hex}"` key on every worker, with no
   coordination.
 - **Atomic TTL claims with response replay**: exactly one concurrent caller
@@ -13,7 +13,7 @@ Redis-backed request deduplication in the commerce services.
   a typed `ConcurrentRequest` error.
 - **Pluggable stores**: in-process `MemoryStore` (default) and
   process-shared `RedisStore` (`SET NX EX`, no Lua), behind one
-  object-safe `IdempotencyStore` trait — bring your own (Postgres,
+  object-safe `IdempotencyStore` trait; bring your own (Postgres,
   DynamoDB, …) for any other deployment.
 - **Fail-closed capacity**: the memory store rejects new claims at
   capacity rather than evicting live ones.
@@ -71,7 +71,7 @@ path:
    one caller observes `Claim::First`; others observe `Claim::Replay`
    (a completed response exists) or `Claim::InFlight` (someone is
    mid-request). The executor surfaces `InFlight` as
-   `IdempotencyError::ConcurrentRequest` — it never queues or waits; the
+   `IdempotencyError::ConcurrentRequest`; it never queues or waits; the
    caller retries or collapses duplicates upstream.
 2. **At-least-once execution across TTL boundaries is the caller's
    concern.** A request that outlives its claim TTL can execute again on
@@ -84,7 +84,7 @@ path:
 4. **Capacity fails closed.** At capacity with only live claims,
    `MemoryStore` returns `StoreError::CapacityExceeded` instead of
    evicting: forgetting a held claim would re-admit a duplicate
-   execution — the exact failure the kit exists to prevent. Shed load
+   execution; the exact failure the kit exists to prevent. Shed load
    instead.
 5. **Zero TTLs are floored to 1 second** (`RedisStore`) so no store can
    produce instant-expire claims.
@@ -93,7 +93,7 @@ path:
 
 `IdempotencyKey::derive(scope, request_bytes)` = `"{scope}:" ++ hex(BLAKE3-256(request_bytes))`.
 
-- **Why BLAKE3?** Keys are identifiers, not secrets — no keyed MAC is
+- **Why BLAKE3?** Keys are identifiers, not secrets; no keyed MAC is
   needed, so BLAKE3's speed (~GB/s, SIMD/parallel) beats HMAC-SHA256 at
   zero security cost here. The 256-bit digest gives collision/preimage
   margins that make deliberate cross-customer key collisions

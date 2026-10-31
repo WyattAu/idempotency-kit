@@ -1,4 +1,4 @@
-# Security Policy — idempotency-kit
+# Security Policy: idempotency-kit
 
 ## Supported versions
 
@@ -26,7 +26,7 @@ Security considerations for integrators:
   key. Do not embed anything in a key you would not publish; protect
   the *claim endpoints*, not the key format.
 - **Exactly-once response replay, at-least-once execution.** The kit
-  does not make side effects idempotent — a request that outlives its
+  does not make side effects idempotent; a request that outlives its
   TTL claim can execute twice. Bound your TTLs beyond worst-case
   request duration and make side effects idempotent at the source
   (natural keys, conditional writes).
@@ -41,7 +41,7 @@ Security considerations for integrators:
   authenticated, encrypted connection (`redis://` with ACLs / TLS via
   your deployment); claim keys are readable by anyone with Redis
   access, and responses may contain application data.
-- `#![forbid(unsafe_code)]` — no unsafe blocks exist in this crate.
+- `#![forbid(unsafe_code)]`; no unsafe blocks exist in this crate.
 
 [GitHub security advisories]:
     https://github.com/WyattAu/idempotency-kit/security/advisories/new
